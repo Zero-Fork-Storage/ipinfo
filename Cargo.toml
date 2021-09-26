@@ -1,0 +1,19 @@
+[package]
+name = "ipinfo"
+version = "0.1.0"
+authors = ["zeroday0619 <zeroday0619_dev@outlook.com"]
+edition = "2018"
+repository = "https://github.com/zeroday0619/ipinfo" 
+license = "MIT"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+serde = { version = "1.0.130", features = ["derive"] }
+
+[dependencies.clap]
+version = "3.0.0-beta.4"
+default-features = false
+
+# Cherry-pick the features you'd like to use
+features = ["std", "suggestions", "color"]
