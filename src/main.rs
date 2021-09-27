@@ -1,4 +1,5 @@
 use reqwest;
+use clap::clap_app;
 use serde::{Deserialize};
 use std::collections::HashMap;
 
@@ -208,9 +209,23 @@ fn get_geolocation(query_ip: &str) {
 
 
 fn main() {
-    let query = "1.1.1.1";
-    get_as_number(query);
-    get_country(query);
-    get_city(query);
-    get_geolocation(query);
+    let matches = clap_app!(ip_info =>
+        (version: "0.1.0")
+        (author: "zeroday0619 <zeroday0619_dev@outlook.com>")
+        (about: "Get information about an IP address")
+        (@arg IP: -i --ip +required +takes_value "IP address")
+        (@arg mode: -m --mode +required +takes_value "Mode: [0: asn ,1: country, 2: city, 3: geolocation]")
+    ).get_matches();
+
+    if let Some(mode) = matches.value_of("mode") {
+        if let Some(ip) = matches.value_of("IP"){
+            match mode {
+                "0" => get_as_number(ip),
+                "1" => get_country(ip),
+                "2" => get_city(ip),
+                "3" => get_geolocation(ip),
+                _ => println!("Mode not found")
+            }
+        }
+    }
 }
