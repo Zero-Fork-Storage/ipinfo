@@ -50,3 +50,4 @@ Cargo.lock
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,rust
+.idea
